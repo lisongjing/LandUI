@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src http://127.0.0.1:1111/">
+  <meta http-equiv="X-Content-Security-Policy"
+    content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src http://127.0.0.1:1111/">
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Land - Edit Script</title>
+
+  <!--Import Google Icon Font-->
+  <link type="text/css" rel="stylesheet" href="../css/icon.css">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="../css/edit.css">
+</head>
+
+<body>
+  <div class="card-panel pushpin nav-header">
+    <div class="row">
+      <div class="col s3 m1 l1 center-align">
+        <i class="material-icons small">alarm_on</i>
+      </div>
+      <div class="col s9 m6 l6">
+        <input placeholder="未命名脚本" id="script_name" type="text" class="validate" value="TRS检查" />
+      </div>
+      <div class="col s4 m1 l2 small-btn-groups center-align">
+        <a class="tooltipped btn-floating btn-small waves-effect waves-light grey" data-position="bottom"
+          data-tooltip="撤销"><i class="material-icons">undo</i></a>
+        <a class="tooltipped btn-floating btn-small waves-effect waves-light grey" data-position="bottom"
+          data-tooltip="重做"><i class="material-icons">redo</i></a>
+      </div>
+      <div class="col s8 m4 l3 btn-groups right-align">
+        <a class="tooltipped btn-floating btn waves-effect waves-light orange" data-position="bottom"
+          data-tooltip="分享"><i class="material-icons">share</i></a>
+        <a class="tooltipped btn-floating btn waves-effect waves-light green" id="run-btn" data-position="bottom"
+          data-tooltip="运行" onclick="executeScript(this)"><i class="material-icons">play_arrow</i></a>
+        <a class="tooltipped btn-floating btn waves-effect waves-light light-blue page-close-btn" data-position="bottom"
+          data-tooltip="完成"><i class="material-icons">done</i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-header"></div>
+
+  <div class="row">
+    <div class="col s12 m9 l9">
+      <!-- Note that "m9 l9" was added -->
+      <!-- Teal page content
+
+              This content will be:
+          9-columns-wide on large screens,
+          9-columns-wide on medium screens,
+          12-columns-wide on small screens  -->
+
+      <ul class="collapsible expandable script">
+
+        <li class="hoverable mb-1p5">
+          <div class="collapsible-header script hoverable">
+            <b class="ml-1p5 mr-1p5">新建浏览器窗口</b>
+            <div class="switch ml-1p5 mr-1p5">
+              隐藏窗口？
+              <label>
+                否
+                <input type="checkbox">
+                <span class="lever"></span>
+                是
+              </label>
+            </div>
+            <a class="waves-effect waves-teal btn-flat center-align remove-cmd-btn"
+              onclick="removeCurrentCommand(this)"><i class="material-icons tiny">close</i></a>
+          </div>
+        </li>
+
+        <li class="hoverable mb-1p5">
+          <div class="collapsible-header script hoverable">
+            <b class="ml-1p5 mr-1p5">打开网页链接：</b>
+            <div class="input-field ml-1p5 mr-1p5">
+              <input id="input-url" type="text" class="validate" size="40" required value="http://test.com">
+              <label for="input-url">URL</label>
+            </div>
+            <a class="waves-effect waves-teal btn-flat center-align remove-cmd-btn"
+              onclick="removeCurrentCommand(this)"><i class="material-icons tiny">close</i></a>
+          </div>
+        </li>
+
+        <li class="hoverable mb-1p5">
+          <div class="collapsible-header script hoverable">
+            <b class="ml-1p5 mr-1p5">打开网页链接：</b>
+            <div class="input-field ml-1p5 mr-1p5">
+              <input id="input-url" type="text" class="validate" size="40" required value="http://test.com">
+              <label for="input-url">URL</label>
+            </div>
+            <a class="waves-effect waves-teal btn-flat center-align remove-cmd-btn"
+              onclick="removeCurrentCommand(this)"><i class="material-icons tiny">close</i></a>
+          </div>
+        </li>
+
+        <li class="hoverable mb-1p5">
+          <div class="collapsible-header script hoverable">
+            <b class="ml-1p5 mr-1p5">定位网页元素：</b>
+            <div class="input-field ml-1p5 mr-1p5">
+              <input id="input-url" type="text" class="validate" size="40" required>
+              <label for="input-url">XPath</label>
+            </div>
+            <a class="waves-effect waves-teal btn-flat center-align remove-cmd-btn"
+              onclick="removeCurrentCommand(this)"><i class="material-icons tiny">close</i></a>
+          </div>
+        </li>
+
+        <li class="hoverable mb-1p5">
+          <div class="collapsible-header script hoverable">
+            <b class="ml-1p5 mr-1p5">点击网页元素：</b>
+            <div class="switch ml-1p5 mr-1p5">
+              强制点击？
+              <label>
+                否
+                <input type="checkbox" checked>
+                <span class="lever"></span>
+                是
+              </label>
+            </div>
+            <a class="waves-effect waves-teal btn-flat center-align remove-cmd-btn"
+              onclick="removeCurrentCommand(this)"><i class="material-icons tiny">close</i></a>
+          </div>
+        </li>
+
+        <li class="hoverable mb-1p5">
+          <div class="collapsible-header script hoverable">
+            <b class="ml-1p5 mr-1p5">输入文本：</b>
+            <div class="switch ml-1p5 mr-1p5">
+              强制使用键盘模拟？
+              <label>
+                否
+                <input type="checkbox">
+                <span class="lever"></span>
+                是
+              </label>
+            </div>
+            <div class="input-field ml-1p5 mr-1p5">
+              <input id="input-url" type="text" class="validate" size="40" required>
+              <label for="input-url">文本</label>
+            </div>
+            <a class="waves-effect waves-teal btn-flat center-align remove-cmd-btn"
+              onclick="removeCurrentCommand(this)"><i class="material-icons tiny">close</i></a>
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="col s12 m3 l3">
+      <!-- Note that "m3 l3" was added -->
+      <!-- Grey navigation panel
+
+              This content will be:
+          3-columns-wide on large screens,
+          3-columns-wide on medium screens,
+          12-columns-wide on small screens  -->
+
+      <ul class="collapsible expandable">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">code</i>流程控制</div>
+          <div class="collapsible-body commands">
+            <div class="collection commands">
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c1">如果</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c2">重复</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c3">等待</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">apps</i>应用</div>
+          <div class="collapsible-body commands">
+            <div class="collection commands">
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c4">打开应用</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c5">关闭应用</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c22">执行Shell/CMD命令</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">open_in_browser</i>浏览器</div>
+          <div class="collapsible-body commands">
+            <div class="collection commands">
+              <!-- <a href="#!" class="collection-item hoverable-shallow">打开浏览器</a> -->
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c6">新建窗口</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c7">新建标签页</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c8">打开链接</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c9">关闭标签页</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c10">关闭窗口</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">location_on</i>控件定位</div>
+          <div class="collapsible-body commands">
+            <div class="collection commands">
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c11">定位网页元素</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c12">定位坐标点</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c13">定位图片位置</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">mouse</i>点击</div>
+          <div class="collapsible-body commands">
+            <div class="collection commands">
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c14">点击网页元素</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c15">点击坐标点</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c16">点击图片位置</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">keyboard</i>键盘</div>
+          <div class="collapsible-body commands">
+            <div class="collection commands">
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c17">输入</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c18">触发快捷键</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c19">绑定快捷键为触发器</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">assignment</i>剪贴板</div>
+          <div class="collapsible-body commands">
+            <div class="collection commands">
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c20">复制</a>
+              <a href="#!" class="collection-item hoverable-shallow" data-id="c21">粘贴</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!--JavaScript at end of body for optimized loading-->
+  <script type="text/javascript" src="../js/materialize.min.js"></script>
+  <script type="text/javascript" src="../js/sortable/Sortable.min.js"></script>
+  <script type="text/javascript" src="../js/edit.js"></script>
+</body>
+
+</html>

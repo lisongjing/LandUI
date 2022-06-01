@@ -1,0 +1,47 @@
+.img-tiny {
+    width: auto;
+    height: auto;
+    max-width: 1rem;
+    max-height: 1rem;
+}
+
+.img-small {
+    width: auto;
+    height: auto;
+    max-width: 2rem;
+    max-height: 2rem;
+}
+
+.img-medium {
+    width: auto;
+    height: auto;
+    max-width: 4rem;
+    max-height: 4rem;
+}
+
+.img-large {
+    width: auto;
+    height: auto;
+    max-width: 6rem;
+    max-height: 6rem;
+}
+
+.mt-5 {
+    margin-top: 5rem;
+}
+
+.ml-3 {
+    margin-left: 3rem;
+}
+
+.mr-3 {
+    margin-right: 3rem;
+}
+
+.btn-flat {
+    padding: 0;
+}
+
+.small-btn-groups a{
+    margin: 0 0.1rem 0 0.1rem;
+}

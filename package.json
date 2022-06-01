@@ -1,0 +1,15 @@
+{
+  "name": "land-gui",
+  "version": "1.0.0",
+  "description": "Land GUI",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Songjing",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^18.2.3"
+  }
+}
