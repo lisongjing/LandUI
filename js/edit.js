@@ -218,7 +218,7 @@ function executeScript(source) {
         tmpContainer.innerHTML = stopBtnCode;
         parent.replaceChild(tmpContainer.children[0], source);
         const Http = new XMLHttpRequest();
-        const url = 'http://127.0.0.1:1111/ping';
+        const url = 'http://127.0.0.1:1111/execute';
         Http.open("POST", url);
         Http.send();
     
